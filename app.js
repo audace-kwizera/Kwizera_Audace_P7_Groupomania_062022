@@ -1,6 +1,6 @@
 // Création de express
 const express = require('express');
-
+const routes = require('./routes');
 const app = express();
 
 // Fix erreur cors
@@ -15,24 +15,27 @@ app.use(express.urlencoded({extended: true}));
 // Middleware pour intercepter tout ce qui contient du json
 app.use(express.json());
 
-app.use((req, res, next) => {
-	console.log('Requête reçue !');
-	next();
-});
-
-app.use((req, res, next) => {
-	res.status(201);
-	next();
-});
+app.use('/api', routes);
 
 
-app.use((req, res, next) => {
-	res.json({ message: 'Votre requête a bien été reçu !' });
-	next();
-});
-
-app.use((req, res) => {
-	console.log('Réponse envoyé avec succès !');
-});
+//app.use((req, res, next) => {
+//	console.log('Requête reçue !');
+//	next();
+//});
+//
+//app.use((req, res, next) => {
+//	res.status(201);
+//	next();
+//});
+//
+//
+//app.use((req, res, next) => {
+//	res.json({ message: 'Votre requête a bien été reçu !' });
+//	next();
+//});
+//
+//app.use((req, res) => {
+//	console.log('Réponse envoyé avec succès !');
+//});
 
 module.exports = app;
